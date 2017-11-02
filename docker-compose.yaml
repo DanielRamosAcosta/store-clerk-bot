@@ -1,0 +1,20 @@
+version: '3'
+services:
+  bot:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    image: danielramosacosta/storeclerkbot:1.0.0
+    environment:
+      REDIS_ENDPINT: redis:6379
+      TELEGRAM_BOT_TOKEN: $TELEGRAM_BOT_TOKEN
+      CHECK_ENDPOINT: https://www.pccomponentes.com/intel-core-i7-8700k-37ghz-box
+      ITEM_TITLE: i7 8700k
+      JQUERY_SLECTOR: "#btnsWishAddBuy > button:nth-child(3)"
+      MATCHING_REGEX: comprar
+      CHECK_INTERVAL: 5m
+      REDIS_ENDPINT: redis://redis:6379
+  redis:
+    image: "redis:4.0.2-alpine"
+    ports:
+      - "6379:6379"

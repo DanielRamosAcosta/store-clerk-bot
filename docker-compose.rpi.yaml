@@ -4,14 +4,14 @@ services:
     build:
       context: .
       dockerfile: ./Dockerfile.rpi
-    image: danielramosacosta/storeclerkbot-rpi:1.0.0
+    image: danielramosacosta/storeclerkbot-rpi:1.0.1
     environment:
       REDIS_ENDPINT: redis:6379
       TELEGRAM_BOT_TOKEN: $TELEGRAM_BOT_TOKEN
       CHECK_ENDPOINT: https://www.pccomponentes.com/intel-core-i7-8700k-37ghz-box
       ITEM_TITLE: i7 8700k
       JQUERY_SLECTOR: "#btnsWishAddBuy > button:nth-child(3)"
-      MATCHING_REGEX: comprar
+      MATCHING_REGEX: avísame
       CHECK_INTERVAL: 5m
       REDIS_ENDPINT: redis://redis:6379
   redis:

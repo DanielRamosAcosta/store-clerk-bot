@@ -56,6 +56,7 @@ bot.command('revisions', async ctx => {
 bot.command('checknow', async ctx => {
   ctx.reply('Checking stock...')
   const isAvailable = await checkStock()
+  console.log(isAvailable)
   if (isAvailable) {
     broadcastAvailable()
   } else {
@@ -80,7 +81,8 @@ bot.command('help', ctx => {
   ctx.reply(help)
 })
 
-function broadcastAvailable() {
+async function broadcastAvailable() {
+  const users = await redis.lrange('users', 0, -1)
   users.forEach(user => {
     telegram.sendMessage(
       user,
@@ -96,8 +98,9 @@ async function checkStock() {
   )
   const { data } = await axios.get(config.CHECK_ENDPOINT)
   const $ = cheerio.load(data)
-  const text = $(config.selector).text()
-  return regex.test(text)
+  const text = $(config.JQUERY_SLECTOR).text()
+  console.log(text)
+  return !regex.test(text)
 }
 
 async function iterate() {
